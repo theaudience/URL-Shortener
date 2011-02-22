@@ -16,6 +16,7 @@ Add the UrlShortenerDelegate to the header-file and implement the corresponding 
 	- (void)urlShortenerFailedWithError:(NSError *)error {}
 	
 in your .m file.
+
 After that init a new instance of the UrlShortener and call shortenUrl: with your long url:
 
 	UrlShortener *_shortener = [[UrlShortener alloc] initWithDelegate:self];
