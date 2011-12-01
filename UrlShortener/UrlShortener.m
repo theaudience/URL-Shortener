@@ -41,20 +41,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 }
 
 - (NSString *)encodeURL:(NSString *)url {
-    NSString * encoded = (NSString *)CFURLCreateStringByAddingPercentEscapes(
+    NSString * encoded = (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(
                                                                                 NULL,
-                                                                                (CFStringRef)url,
+                                                                                (__bridge CFStringRef)url,
                                                                                 NULL,
                                                                                 (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                 kCFStringEncodingUTF8);
-    return [encoded autorelease];
+    return encoded;
 }
 
 - (void)shortenUrl:(NSString *)longUrl withService:(UrlShortenerService)service {
-    [longUrl retain];
     if (_connection == nil)
     {
-    	NSString *encodedUrl = [[self encodeURL:longUrl] retain];
+    	NSString *encodedUrl = [self encodeURL:longUrl];
         _service = service;
         NSMutableURLRequest *request;
         if (service == UrlShortenerServiceRedirect) {
@@ -81,10 +80,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             NSString *endPoint = [NSString stringWithFormat:BITLY_URL, encodedUrl, BITLY_APIKEY, BITLY_LOGIN];
             request = [NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]];
         }
-        [encodedUrl release];
         [NSURLConnection connectionWithRequest:request delegate:self];
     }
-    [longUrl release];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
@@ -99,9 +96,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             [delegate urlShortenerSucceededWithShortUrl:[components objectAtIndex:7]];
             return;
         }
-        [delegate urlShortenerSucceededWithShortUrl:[shortUrl autorelease]];
+        [delegate urlShortenerSucceededWithShortUrl:shortUrl];
     }
-    [_connection release];
     _connection = nil;
 }
 
@@ -109,12 +105,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     if (delegate != nil && [delegate respondsToSelector:@selector(urlShortenerFailedWithError:)]) {
         [delegate urlShortenerFailedWithError:error];
     }
-    [_connection release];
     _connection = nil;
-}
-
-- (void)dealloc {
-    [_data release];
-    [super dealloc];
 }
 @end

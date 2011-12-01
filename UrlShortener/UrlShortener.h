@@ -39,7 +39,8 @@ typedef enum {
     UrlShortenerService _service;
 }
 
-@property (nonatomic, assign) id<UrlShortenerDelegate> delegate;
+@property (nonatomic, strong) id<UrlShortenerDelegate> delegate;
+
 - (id)initWithDelegate:(id)del;
 
 - (void)shortenUrl:(NSString *)longUrl withService:(UrlShortenerService)service;

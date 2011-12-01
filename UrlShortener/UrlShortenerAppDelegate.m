@@ -17,19 +17,17 @@
 {
     // Override point for customization after application launch.
     _shortener = [[UrlShortener alloc] initWithDelegate:self];
-    [_shortener shortenUrl:@"http://code.google.com/intl/de-DE/apis/urlshortener/v1/getting_started.html#shorten" withService:UrlShortenerServiceIsgd];
+    [_shortener shortenUrl:@"http://twitter.com/the_audience" withService:UrlShortenerServiceRedirect];
     [self.window makeKeyAndVisible];
     return YES;
 }
 
 - (void)urlShortenerSucceededWithShortUrl:(NSString *)shortUrl {
     NSLog(@"%@", shortUrl);
-    [_shortener release];
     
 }
 - (void)urlShortenerFailedWithError:(NSError *)error {
     // Handle the error.
-    [_shortener release];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -69,12 +67,6 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-}
-
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
 }
 
 @end
