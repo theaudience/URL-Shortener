@@ -35,11 +35,11 @@ typedef enum {
 @interface UrlShortener : NSObject {
     NSURLConnection *_connection;
     NSMutableData *_data;
-    id<UrlShortenerDelegate> delegate;
+    __weak id<UrlShortenerDelegate> delegate;
     UrlShortenerService _service;
 }
 
-@property (nonatomic, strong) id<UrlShortenerDelegate> delegate;
+@property (nonatomic, weak) id<UrlShortenerDelegate> delegate;
 
 - (id)initWithDelegate:(id)del;
 
