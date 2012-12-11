@@ -22,6 +22,9 @@
 #define JMP_URL         @"http://api.bit.ly/v3/shorten?format=txt&longurl=%@&apikey=%@&login=%@&domain=j.mp"
 #define ISGD_URL        @"http://is.gd/create.php?format=simple&url=%@"
 
+static CompletionBlock _completionBlock;
+static ErrorBlock _errorBlock;
+
 @interface UrlShortener ()
 - (NSString *)encodeURL:(NSString *)url;
 @end
@@ -30,10 +33,21 @@
 
 @synthesize delegate;
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _data = [[NSMutableData alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithDelegate:(id)del {
     self = [super init];
-    _data = [[NSMutableData alloc] init];
-    delegate = del;
+    if (self) {
+        _data = [[NSMutableData alloc] init];
+        delegate = del;
+    }
     return self;
 }
 
@@ -81,24 +95,42 @@
     }
 }
 
+- (void)shortenUrl:(NSString *)longUrl withService:(UrlShortenerService)service completion:(CompletionBlock)completionBlock error:(ErrorBlock)errorBlock {
+    _completionBlock = [completionBlock copy];
+    _errorBlock = [errorBlock copy];
+    [self shortenUrl:longUrl withService:service];
+    
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [_data appendData:data];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSString *shortUrl = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
+    if (_service == UrlShortenerServiceGoogle) {
+        NSArray *components = [shortUrl componentsSeparatedByString:@"\""];
+        shortUrl = [components objectAtIndex:7];
+    }
+    if (_completionBlock) {
+        _completionBlock(shortUrl);
+        _completionBlock = nil;
+        _errorBlock = nil;
+        return;
+    }
     if (delegate != nil && [delegate respondsToSelector:@selector(urlShortenerSucceededWithShortUrl:)]) {
-        NSString *shortUrl = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
-        if (_service == UrlShortenerServiceGoogle) {
-            NSArray *components = [shortUrl componentsSeparatedByString:@"\""];
-            [delegate urlShortenerSucceededWithShortUrl:[components objectAtIndex:7]];
-            return;
-        }
         [delegate urlShortenerSucceededWithShortUrl:shortUrl];
     }
     _connection = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    if (_errorBlock) {
+        _errorBlock(error);
+        _completionBlock = nil;
+        _errorBlock = nil;
+        return;
+    }
     if (delegate != nil && [delegate respondsToSelector:@selector(urlShortenerFailedWithError:)]) {
         [delegate urlShortenerFailedWithError:error];
     }

@@ -14,8 +14,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^CompletionBlock)(NSString *shortUrl);
+typedef void (^ErrorBlock)(NSError *error);
+
 @protocol UrlShortenerDelegate <NSObject>
 
+@optional
 - (void)urlShortenerSucceededWithShortUrl:(NSString *)shortUrl;
 - (void)urlShortenerFailedWithError:(NSError *)error;
 
@@ -41,4 +45,7 @@ typedef enum {
 - (id)initWithDelegate:(id)del;
 
 - (void)shortenUrl:(NSString *)longUrl withService:(UrlShortenerService)service;
+
+- (void)shortenUrl:(NSString *)longUrl withService:(UrlShortenerService)service completion:(CompletionBlock)completionBlock error:(ErrorBlock)errorBlock;
+
 @end

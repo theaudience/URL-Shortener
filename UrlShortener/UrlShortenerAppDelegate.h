@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UrlShortener.h"
 
-@interface UrlShortenerAppDelegate : NSObject <UIApplicationDelegate, UrlShortenerDelegate> {
-    UrlShortener *_shortener;
-}
+@interface UrlShortenerAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 

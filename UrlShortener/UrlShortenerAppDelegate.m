@@ -16,18 +16,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    _shortener = [[UrlShortener alloc] initWithDelegate:self];
-    [_shortener shortenUrl:@"http://twitter.com/the_audience" withService:UrlShortenerServiceRedirect];
     [self.window makeKeyAndVisible];
     return YES;
-}
-
-- (void)urlShortenerSucceededWithShortUrl:(NSString *)shortUrl {
-    NSLog(@"%@", shortUrl);
-    
-}
-- (void)urlShortenerFailedWithError:(NSError *)error {
-    // Handle the error.
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

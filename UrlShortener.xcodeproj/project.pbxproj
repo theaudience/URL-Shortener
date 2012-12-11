@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3164C59C167759760006D79F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3164C59B167759760006D79F /* RootViewController.m */; };
+		3164C5A2167761140006D79F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3164C5A1167761140006D79F /* Default-568h@2x.png */; };
 		31C599851312C39E00F6601D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C599841312C39E00F6601D /* UIKit.framework */; };
 		31C599871312C39E00F6601D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C599861312C39E00F6601D /* Foundation.framework */; };
 		31C599891312C39E00F6601D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31C599881312C39E00F6601D /* CoreGraphics.framework */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3164C59A167759760006D79F /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		3164C59B167759760006D79F /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		3164C5A1167761140006D79F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		31C599801312C39E00F6601D /* UrlShortener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UrlShortener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31C599841312C39E00F6601D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		31C599861312C39E00F6601D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -27,8 +32,8 @@
 		31C599931312C39E00F6601D /* UrlShortenerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlShortenerAppDelegate.h; sourceTree = "<group>"; };
 		31C599941312C39E00F6601D /* UrlShortenerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UrlShortenerAppDelegate.m; sourceTree = "<group>"; };
 		31C599971312C39E00F6601D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		31C599A61312C40500F6601D /* UrlShortener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrlShortener.h; sourceTree = "<group>"; };
-		31C599A71312C40500F6601D /* UrlShortener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UrlShortener.m; sourceTree = "<group>"; };
+		31C599A61312C40500F6601D /* UrlShortener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UrlShortener.h; path = UrlShortener/UrlShortener.h; sourceTree = "<group>"; };
+		31C599A71312C40500F6601D /* UrlShortener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UrlShortener.m; path = UrlShortener/UrlShortener.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,10 +50,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3164C59E16775B550006D79F /* UrlShortener */ = {
+			isa = PBXGroup;
+			children = (
+				31C599A61312C40500F6601D /* UrlShortener.h */,
+				31C599A71312C40500F6601D /* UrlShortener.m */,
+			);
+			name = UrlShortener;
+			sourceTree = "<group>";
+		};
 		31C599751312C39E00F6601D = {
 			isa = PBXGroup;
 			children = (
-				31C5998A1312C39E00F6601D /* UrlShortener */,
+				3164C59E16775B550006D79F /* UrlShortener */,
+				31C5998A1312C39E00F6601D /* UrlShortenerSample */,
 				31C5998B1312C39E00F6601D /* Supporting Files */,
 				31C599831312C39E00F6601D /* Frameworks */,
 				31C599811312C39E00F6601D /* Products */,
@@ -73,21 +88,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		31C5998A1312C39E00F6601D /* UrlShortener */ = {
+		31C5998A1312C39E00F6601D /* UrlShortenerSample */ = {
 			isa = PBXGroup;
 			children = (
+				3164C59A167759760006D79F /* RootViewController.h */,
+				3164C59B167759760006D79F /* RootViewController.m */,
 				31C599931312C39E00F6601D /* UrlShortenerAppDelegate.h */,
 				31C599941312C39E00F6601D /* UrlShortenerAppDelegate.m */,
-				31C599A61312C40500F6601D /* UrlShortener.h */,
-				31C599A71312C40500F6601D /* UrlShortener.m */,
 				31C599961312C39E00F6601D /* MainWindow.xib */,
 			);
+			name = UrlShortenerSample;
 			path = UrlShortener;
 			sourceTree = "<group>";
 		};
 		31C5998B1312C39E00F6601D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3164C5A1167761140006D79F /* Default-568h@2x.png */,
 				31C5998C1312C39E00F6601D /* UrlShortener-Info.plist */,
 				31C599901312C39E00F6601D /* UrlShortener-Prefix.pch */,
 				31C599911312C39E00F6601D /* main.m */,
@@ -147,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31C599981312C39E00F6601D /* MainWindow.xib in Resources */,
+				3164C5A2167761140006D79F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +178,7 @@
 				31C599921312C39E00F6601D /* main.m in Sources */,
 				31C599951312C39E00F6601D /* UrlShortenerAppDelegate.m in Sources */,
 				31C599A81312C40500F6601D /* UrlShortener.m in Sources */,
+				3164C59C167759760006D79F /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
