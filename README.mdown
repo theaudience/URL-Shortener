@@ -5,7 +5,19 @@ URL Shortener
 Simple URL Shortener for iPhone, iPad and iPod Touch. Supports cli.gs, redir.ec, bit.ly, j.mp, is.gd and goo.gl.
 
 
-Usage
+Usage with Blocks
+-----
+
+Just drag and drop both UrlShortener files into your own XCode Project and import it into the file in which you want to use it.
+
+Init a new instance of the UrlShortener and call shortenUrl: with your long url and 2 blocks to handle completion and errors:
+
+    - (void)shortenUrl:(NSString *)longUrl withService:(UrlShortenerService)service completion:(CompletionBlock)completionBlock error:(ErrorBlock)errorBlock;
+    
+That's it.
+
+
+Usage with Delegate
 -----
 
 Just drag and drop both UrlShortener files into your own XCode Project and import it into the file in which you want to use it.
