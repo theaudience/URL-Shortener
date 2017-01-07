@@ -1,3 +1,5 @@
+Deprecated and no longer maintained!
+===========
 
 URL Shortener
 ===========
